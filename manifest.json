@@ -1,0 +1,226 @@
+{
+  "manifest_version": 1,
+  "id": "reverb",
+  "version": "26.11.1",
+  "display_name": "Reverb (offline, voice clone, 7 languages, non-commercial)",
+  "summary": "Reverb-TTS by Software Mansion AI Labs: speaks English, German, French, Spanish, Italian, Polish and Portuguese at 24 kHz, in 16 preset voices or in the speaker's own voice, cloned from 3 to 10 seconds of the video and its subtitles. Runs on the CPU. The 640 MB model downloads on the first line (378 MB in Fast mode, about twice as fast); cloning needs 327 MB more. The model is licensed for non-commercial use only (CC BY-NC 4.0).",
+  "author": "Subtitld",
+  "homepage": "https://github.com/Subtitld/addon-reverb",
+  "license": "Apache-2.0 (add-on, and Reverb's code it ports); CC BY-NC 4.0 (Reverb model weights and preset voices: non-commercial use only)",
+  "executable": "bin/reverb-addon",
+  "protocol": 1,
+  "startup_timeout_sec": 30,
+  "platforms": [
+    "linux",
+    "macos",
+    "windows"
+  ],
+  "tasks": [
+    "tts.synthesize"
+  ],
+  "compute": "cpu",
+  "voice_clone": true,
+  "languages": [
+    "en",
+    "de",
+    "fr",
+    "es",
+    "it",
+    "pl",
+    "pt"
+  ],
+  "voices": [
+    {
+      "id": "reverb-clone",
+      "language": "*",
+      "display_name": "Speaker's own voice (cloned from the video)",
+      "sample_rate": 24000,
+      "requires": [
+        "voice_ref_audio"
+      ]
+    },
+    {
+      "id": "reverb-en-female-narrator",
+      "language": "*",
+      "display_name": "English woman, narrator",
+      "sample_rate": 24000
+    },
+    {
+      "id": "reverb-en-female-whisper",
+      "language": "*",
+      "display_name": "English woman, whispering",
+      "sample_rate": 24000
+    },
+    {
+      "id": "reverb-en-male-narrator-1",
+      "language": "*",
+      "display_name": "English man, narrator 1",
+      "sample_rate": 24000
+    },
+    {
+      "id": "reverb-en-male-narrator-2",
+      "language": "*",
+      "display_name": "English man, narrator 2",
+      "sample_rate": 24000
+    },
+    {
+      "id": "reverb-en-male-angry",
+      "language": "*",
+      "display_name": "English man, angry",
+      "sample_rate": 24000
+    },
+    {
+      "id": "reverb-de-female-standard",
+      "language": "*",
+      "display_name": "German woman",
+      "sample_rate": 24000
+    },
+    {
+      "id": "reverb-de-male-standard",
+      "language": "*",
+      "display_name": "German man",
+      "sample_rate": 24000
+    },
+    {
+      "id": "reverb-fr-female-standard",
+      "language": "*",
+      "display_name": "French woman",
+      "sample_rate": 24000
+    },
+    {
+      "id": "reverb-fr-male-standard",
+      "language": "*",
+      "display_name": "French man",
+      "sample_rate": 24000
+    },
+    {
+      "id": "reverb-es-male-standard-1",
+      "language": "*",
+      "display_name": "Spanish man 1",
+      "sample_rate": 24000
+    },
+    {
+      "id": "reverb-es-male-standard-2",
+      "language": "*",
+      "display_name": "Spanish man 2",
+      "sample_rate": 24000
+    },
+    {
+      "id": "reverb-it-male-standard",
+      "language": "*",
+      "display_name": "Italian man",
+      "sample_rate": 24000
+    },
+    {
+      "id": "reverb-it-male-expressive",
+      "language": "*",
+      "display_name": "Italian man, expressive",
+      "sample_rate": 24000
+    },
+    {
+      "id": "reverb-pl-male-standard",
+      "language": "*",
+      "display_name": "Polish man",
+      "sample_rate": 24000
+    },
+    {
+      "id": "reverb-pt-female-standard",
+      "language": "*",
+      "display_name": "Portuguese woman",
+      "sample_rate": 24000
+    },
+    {
+      "id": "reverb-pt-male-standard",
+      "language": "*",
+      "display_name": "Portuguese man",
+      "sample_rate": 24000
+    }
+  ],
+  "models": [
+    {
+      "id": "reverb",
+      "display_name": "Reverb-TTS v1.0.0 (ONNX, full precision) with the Higgs Audio v2 decoder and 16 preset voices",
+      "repo": "Subtitld/addon-reverb",
+      "revision": "models-1",
+      "size_mb": 640,
+      "license": "CC BY-NC 4.0",
+      "bundled": false,
+      "default": true
+    },
+    {
+      "id": "reverb-fast",
+      "display_name": "Reverb-TTS v1.0.0 network in int8 (Fast mode)",
+      "repo": "Subtitld/addon-reverb",
+      "revision": "models-1",
+      "size_mb": 266,
+      "license": "CC BY-NC 4.0",
+      "bundled": false,
+      "default": false
+    },
+    {
+      "id": "reverb-codec-encoder",
+      "display_name": "Higgs Audio v2 encoder (voice cloning)",
+      "repo": "Subtitld/addon-reverb",
+      "revision": "models-1",
+      "size_mb": 327,
+      "license": "CC BY-NC 4.0",
+      "bundled": false,
+      "default": false
+    }
+  ],
+  "disk_required_mb": 1400,
+  "ram_required_mb": 2560,
+  "config_schema": {
+    "fields": [
+      {
+        "key": "threads",
+        "type": "int",
+        "label": "CPU threads",
+        "default": 0,
+        "min": 0,
+        "max": 64,
+        "step": 1,
+        "help": "0 uses the number of logical processors, at most 8. More is rarely faster."
+      },
+      {
+        "key": "steps",
+        "type": "int",
+        "label": "Quality steps",
+        "default": 8,
+        "min": 2,
+        "max": 32,
+        "step": 1,
+        "help": "Main sampler passes per line. 8 is Reverb's own setting; fewer is faster, with more slips."
+      },
+      {
+        "key": "precision",
+        "type": "select",
+        "label": "Speed",
+        "default": "exact",
+        "options": [
+          {
+            "value": "exact",
+            "label": "Exact (Reverb as published)"
+          },
+          {
+            "value": "fast",
+            "label": "Fast (about twice as fast; its own 266 MB download)"
+          }
+        ],
+        "help": "Fast runs the network in 8-bit integers. Its lines usually sound the same, but it strays further from the published model and slips more often."
+      },
+      {
+        "key": "voice_ref_audio",
+        "type": "file",
+        "label": "Fallback reference clip",
+        "help": "Cloned for the speaker's own voice when Subtitld has no clip of the speaker to send: 3 to 10 seconds of one person speaking, clean."
+      },
+      {
+        "key": "voice_ref_text",
+        "type": "string",
+        "label": "Fallback clip's transcript",
+        "help": "Exactly what is said in the fallback clip. Reverb needs it to clone."
+      }
+    ]
+  }
+}

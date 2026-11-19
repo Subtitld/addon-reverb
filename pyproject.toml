@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "subtitld-addon-reverb"
+version = "26.11.1"
+description = "Subtitld add-on: offline text-to-speech with Reverb-TTS, seven languages, with voice cloning"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Subtitld", email = "jbopen@gmail.com" }]
+requires-python = ">=3.12"
+
+# ONNX Runtime runs the graphs tools/export_models.py makes from Reverb's
+# weights; numpy runs the sampler around them. tokenizers reads Reverb's
+# tokenizer, and Verbalis writes numbers, dates and symbols out as words.
+dependencies = [
+    "onnxruntime>=1.22,<2",
+    "numpy>=1.26,<3",  # constraints.txt pins the release build
+    "tokenizers>=0.21,<1",
+    "verbalis>=0.1.1,<0.2",
+]
+
+[project.optional-dependencies]
+build = ["pyinstaller>=6.10"]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+reverb-addon = "reverb_addon.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["reverb_addon*"]
+
+[tool.setuptools.package-data]
+reverb_addon = ["pins.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["model: needs the Reverb model (downloads 378 MB, and 327 MB more for cloning)"]

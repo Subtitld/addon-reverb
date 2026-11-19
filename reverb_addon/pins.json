@@ -1,0 +1,154 @@
+{
+ "groups": {
+  "core": {
+   "url": "https://github.com/Subtitld/addon-reverb/releases/download/models-1",
+   "revision": "models-1",
+   "files": [
+    {
+     "path": "codec_decoder.onnx",
+     "size": 43296934,
+     "sha256": "c6c1f741d0bf471213808ac167f7e0ef68bb767aecdfa02ba98884f4f0e1f280"
+    },
+    {
+     "path": "tables.npz",
+     "size": 65874456,
+     "sha256": "1c39d8fd2523ec404603be125e0e399fad387ff5d240d3e134da336c1d3bef19"
+    },
+    {
+     "path": "tokenizer.json",
+     "size": 2170389,
+     "sha256": "11a8be5d2c46fe27ff15450e91c3cfdfc7b9949f2de8612ae2991d865c51b5fc"
+    },
+    {
+     "path": "MODEL-LICENSE.md",
+     "size": 1640,
+     "sha256": "f458f3c7b13bb9d1a693eae09974069e8aad095b2a369134287a606496f0be11"
+    }
+   ]
+  },
+  "backbone": {
+   "url": "https://github.com/Subtitld/addon-reverb/releases/download/models-1",
+   "revision": "models-1",
+   "files": [
+    {
+     "path": "backbone.onnx",
+     "size": 528988322,
+     "sha256": "532dcf457c43fdae9d882e5a128bde3bbc5c4f647e937033a6ddec1bc1d9fa22"
+    }
+   ]
+  },
+  "backbone-fast": {
+   "url": "https://github.com/Subtitld/addon-reverb/releases/download/models-1",
+   "revision": "models-1",
+   "files": [
+    {
+     "path": "backbone_int8.onnx",
+     "size": 266274465,
+     "sha256": "f48909c56f80d1efc6194f7949c78bc711811e26cefb580dcf40ebcbcf85ff06"
+    }
+   ]
+  },
+  "clone": {
+   "url": "https://github.com/Subtitld/addon-reverb/releases/download/models-1",
+   "revision": "models-1",
+   "files": [
+    {
+     "path": "codec_encoder.onnx",
+     "size": 327469211,
+     "sha256": "ed971c38c7486ae64e24ce232cc3d552c7e82153b8746bd93d16f218b4ba1713"
+    }
+   ]
+  },
+  "voices": {
+   "repo": "software-mansion/Reverb-TTS",
+   "revision": "72be799c8fb6d56a206d260b425c48bf3bd5943d",
+   "files": [
+    {
+     "path": "README.md",
+     "size": 12064,
+     "sha256": "42524e387ad48a9d698ffdc7614ac572e474db33f470d08bca2ccd2313a5c081"
+    },
+    {
+     "path": "voices/de_female_standard.json",
+     "size": 6775,
+     "sha256": "17584e994a0743a0461c82a6dd0493566e2e1f84e617c00a11440016bdef64c7"
+    },
+    {
+     "path": "voices/de_male_standard.json",
+     "size": 9466,
+     "sha256": "b9ab5c9485fca36c203ac33c9f97b3a500922f6f7de73ca198028639eb2ae8ad"
+    },
+    {
+     "path": "voices/en_female_narrator.json",
+     "size": 14990,
+     "sha256": "7d7270b9f5134c79427b8d0dbc23f62ce4eebbdbe570b9d3dd90d44ce81d2eff"
+    },
+    {
+     "path": "voices/en_female_whisper.json",
+     "size": 13933,
+     "sha256": "624959a3eff869858c58583146fa96d188e5845a473d385de33b78694833c1da"
+    },
+    {
+     "path": "voices/en_male_angry.json",
+     "size": 7017,
+     "sha256": "24ea16c9e15118ea55cc1dabfd4f37901fc5ba0dcc92c6793988d816a2963ea3"
+    },
+    {
+     "path": "voices/en_male_narrator_1.json",
+     "size": 7855,
+     "sha256": "e69282b398ae1d5adfbb81b462b0ab8d3d5c65c09a64eb72507fa7926e456f69"
+    },
+    {
+     "path": "voices/en_male_narrator_2.json",
+     "size": 14830,
+     "sha256": "0f57ac5493d7cf89b6152510b9c627c1b49b58d334e42ffa8753006e6abf56aa"
+    },
+    {
+     "path": "voices/es_male_standard_1.json",
+     "size": 5365,
+     "sha256": "287882480b440cde3b77b6f8e9828776cbbbdf59e0f1a8103302ed0d7cf610bb"
+    },
+    {
+     "path": "voices/es_male_standard_2.json",
+     "size": 8087,
+     "sha256": "374dc5146b6a6eb11360d0347f91dedf1e186a0af8b8a843cc4af29154e7524e"
+    },
+    {
+     "path": "voices/fr_female_standard.json",
+     "size": 6394,
+     "sha256": "56895e4055e142fbdbd9b8cade541880d4b5ad3e4d911f844459c3ddced1b1f5"
+    },
+    {
+     "path": "voices/fr_male_standard.json",
+     "size": 7772,
+     "sha256": "6bdb764082b824729065037d9f61deaf6528f161f862045feb11fedf1e7770ff"
+    },
+    {
+     "path": "voices/it_male_expressive.json",
+     "size": 8770,
+     "sha256": "7a447a4d69a570608222665179e4de425297b15adc75fd6c5389411d24f8500a"
+    },
+    {
+     "path": "voices/it_male_standard.json",
+     "size": 6448,
+     "sha256": "ee12da09566c21678a9787423bd70bad6320783b5071cd7e965ba06997cd26e9"
+    },
+    {
+     "path": "voices/pl_male_standard.json",
+     "size": 8867,
+     "sha256": "5b0b1a001a756a76e8335f2fa8284c65f64325a2639722659e1501192d931309"
+    },
+    {
+     "path": "voices/pt_female_standard.json",
+     "size": 7164,
+     "sha256": "aafee267501834987340b26fb8e0081148c7ddbc365f737a5c50643702cf5508"
+    },
+    {
+     "path": "voices/pt_male_standard.json",
+     "size": 6436,
+     "sha256": "0849dbf87865791cca55787359d40b18e845cbc1df97b4f69f456c7bad4567c6"
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,17 @@
+# Exact versions the release is built and tested with.
+#
+# numpy: its Linux wheel carries libquadmath (LGPL-2.1, with OpenBLAS's
+# Fortran runtime). tools/build_libquadmath_source.py knows this wheel's build
+# and attaches its source to the release; a numpy upgrade that changes it
+# must update BUILDS there.
+onnxruntime==1.32.0
+numpy==2.5.4
+flatbuffers==25.12.19
+protobuf==7.36.2
+packaging==26.3
+tokenizers==0.23.3
+verbalis==0.1.1
+# tokenizers' download helpers, which the add-on never calls (it reads a
+# local tokenizer.json); installed with it, left out of the frozen bundle.
+huggingface-hub==2.4.0
+hf-xet==1.8.0
