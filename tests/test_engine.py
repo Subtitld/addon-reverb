@@ -24,7 +24,7 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
-from reverb_addon import __main__ as addon, download, engine, voices  # noqa: E402
+from reverb_addon import __main__ as addon, audio as addon_audio, download, engine, voices  # noqa: E402
 
 pytestmark = pytest.mark.model
 FIXTURE = json.loads((REPO_ROOT / 'tests' / 'fixtures' / 'package_log_probs.json').read_text(encoding='utf-8'))
@@ -114,6 +114,18 @@ def test_clones_a_clip_with_its_transcript(model):
     assert 0 < voice.pace_frames <= voice.codes.shape[1]
     wav = model.synthesize(LINES['it'], voice, 'it', seed=2)
     assert 1.0 < len(wav) / engine.SAMPLE_RATE < 6
+
+
+def test_refuses_a_transcript_that_does_not_fit_the_clip(model, tmp_path):
+    said = 'Long before the first cities rose, people gathered around fires to tell stories.'
+    clip = model.synthesize(said, _preset('en_male_narrator_1.json'), 'en', seed=2)
+    path = tmp_path / 'clip.wav'
+    addon_audio.write_wav(path, clip, engine.SAMPLE_RATE)
+    clone = voices.by_id(voices.CLONE)
+    assert addon._voice(model, clone, str(path), said, 'en').pace_frames > 0
+    for transcript in (' '.join([said] * 6), 'Long before.'):
+        with pytest.raises(addon._AddonError, match='transcript has far'):
+            addon._voice(model, clone, str(path), transcript, 'en')
 
 
 def test_long_text_comes_in_pieces_and_reports_progress(model):

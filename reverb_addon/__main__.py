@@ -81,6 +81,11 @@ _DISK_FULL_ERRNOS = {errno.ENOSPC, getattr(errno, 'EDQUOT', 122)}
 _PINS_FILE = Path(download.__file__).resolve().parent / 'pins.json'
 # A reference shorter than this gives the model too little of the voice.
 _SHORTEST_REFERENCE = 2.0
+# How fast a clip's transcript may say its words, against Reverb's usual pace.
+# The 16 presets speak at 0.73-1.24; 12 s of a 72 s subtitle sent with all of
+# its text came out at 7.1, and Reverb spoke a 25 s line in 3 s of babble; a
+# subtitle whose text ran past its audio, at 2.2, gave gibberish too.
+_PACE_RANGE = (0.4, 1.6)
 
 log = logging.getLogger('reverb_addon')
 
@@ -395,6 +400,14 @@ def _voice(model, voice: voices.Voice, reference: str, transcript: str, language
     # The transcript is verbalized in its own language, which the host does not send.
     spoken = text.guess_language(transcript, language)
     made = model.clone_voice(samples, rate, transcript, spoken)
+    pace = text.pace(made.text, made.pace_frames) / text.DEFAULT_PACE
+    if not _PACE_RANGE[0] <= pace <= _PACE_RANGE[1]:
+        # Reverb paces the take by the transcript and goes on from its last words.
+        more_or_less = 'more' if pace > 1 else 'fewer'
+        raise _AddonError(ERR_BAD_PARAMS,
+                          f"The clip's transcript has far {more_or_less} words than the clip says "
+                          f'({pace:.1f} times the usual pace), so Reverb would make a broken take. Send the '
+                          'words spoken in the clip, and only those, or pick a preset voice.')
     log.info('cloned a %.1f s reference (%d frames, %d of speech), transcript in %s',
              seconds, made.codes.shape[1], made.pace_frames, spoken)
     clips = [k for k in _voices if isinstance(k, tuple)]
@@ -435,8 +448,10 @@ def _clone_reference(params: dict, options: dict) -> tuple[str, str]:
         raise _AddonError(ERR_BAD_PARAMS,
                           "Reverb clones from a clip and what is said in it, and the clip's transcript is "
                           "missing. Subtitld sends it when the speaker's subtitles are in the language of the "
-                          "audio (set the project's source language if you translated them); for the clip in "
-                          'Configure, type its transcript there. Or pick a preset voice.')
+                          "audio (set the project's source language if you translated them). When it has to "
+                          "cut the clip from a longer subtitle, it also needs a speech recognition add-on for "
+                          "that language, to find the words in the cut. For the clip in Configure, type its "
+                          'transcript there. Or pick a preset voice.')
     return reference, transcript
 
 

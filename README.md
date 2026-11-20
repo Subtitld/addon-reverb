@@ -40,8 +40,11 @@ and its words; without them it drops the first words of each line. Subtitld
 sends the subtitles on the clip's span, in the language of the audio. If the
 project's subtitles were translated, set the project's source language so
 Subtitld can find the original text; otherwise the line is refused with a
-message that says so. For the fallback clip in Configure, type its
-transcript there too. The add-on guesses the transcript's language from its
+message that says so. When the speaker's subtitles are all longer than the
+clip, Subtitld cuts the clip from one and asks a speech recognition add-on
+(Whistle, say) which of its words are in the cut. A transcript with far more
+or fewer words than the clip says is refused: Reverb would make a broken take
+from it. For the fallback clip in Configure, type its transcript there too. The add-on guesses the transcript's language from its
 words, so its numbers are read in that language.
 
 A good clip is 3 to 10 seconds of one person speaking, clean. Clips under
