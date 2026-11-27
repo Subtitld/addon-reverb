@@ -1,7 +1,7 @@
 {
   "manifest_version": 1,
   "id": "reverb",
-  "version": "26.11.2",
+  "version": "26.11.3",
   "display_name": "Reverb (offline, voice clone, 7 languages, non-commercial)",
   "summary": "Reverb-TTS by Software Mansion AI Labs: speaks English, German, French, Spanish, Italian, Polish and Portuguese at 24 kHz, in 16 preset voices or in the speaker's own voice, cloned from 3 to 10 seconds of the video and its subtitles. Runs on the CPU. The 640 MB model downloads on the first line (378 MB in Fast mode, about twice as fast); cloning needs 327 MB more. The model is licensed for non-commercial use only (CC BY-NC 4.0).",
   "author": "Subtitld",

@@ -8,6 +8,6 @@ The package exists so the entry point can run both from source
 (`bin/reverb-addon`).
 """
 
-__version__ = '26.11.2'
+__version__ = '26.11.3'
 ADDON_ID = 'reverb'
 PROTOCOL_VERSION = 1
